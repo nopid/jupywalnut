@@ -1,0 +1,4 @@
+{"argv":["python","-m","walnutkernel", "-f", "{connection_file}"],
+ "display_name":"Walnut",
+ "name":"walnutkernel"
+}

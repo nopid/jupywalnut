@@ -1,0 +1,7 @@
+A raw Jupyter kernel and docker container for Walnut
+
+run me with the Docker hub image using:
+$ docker run --rm -it -p 8888:8888 nopid/walnut
+
+or compile me first with:
+$ docker build -t nopid/walnut .
