@@ -8,7 +8,7 @@ There are plenty of ways to run me:
     $ docker build -t nopid/walnut .
 
  3. as a local docker container built with repo2docker:
-    $ jupyter-repo2docker http://github.com/nopid/jupywalnut/
+    $ jupyter-repo2docker -p 8888:8888 http://github.com/nopid/jupywalnut jupyter-notebook
 
  4. completly remotely in your browser with mybinder:
     $ https://mybinder.org/v2/gh/nopid/jupywalnut/main
