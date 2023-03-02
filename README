@@ -1,7 +1,14 @@
 A raw Jupyter kernel and docker container for Walnut
 
-run me with the Docker hub image using:
-$ docker run --rm -it -p 8888:8888 nopid/walnut
+There are plenty of ways to run me:
+ 1. as a local docker container pulled from the Docker HUB:
+    $ docker run --rm -it -p 8888:8888 nopid/walnut
 
-or compile me first with:
-$ docker build -t nopid/walnut .
+ 2. as a local docker container built from this repo:
+    $ docker build -t nopid/walnut .
+
+ 3. as a local docker container built with repo2docker:
+    $ jupyter-repo2docker http://github.com/nopid/jupywalnut/
+
+ 4. completly remotely in your browser with mybinder:
+    $ https://mybinder.org/v2/gh/nopid/jupywalnut/main
