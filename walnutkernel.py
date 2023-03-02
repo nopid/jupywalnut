@@ -4,6 +4,7 @@ from metakernel.replwrap import REPLWrapper
 from IPython.display import HTML
 from pexpect import spawn
 
+
 class MyMagic(Magic):
     def line_showme(self, lapin):
         """
@@ -23,13 +24,13 @@ class MyMagic(Magic):
 
 class WalnutKernel(ProcessMetaKernel):
     # Identifiers:
-    implementation = 'Walnut'
-    language = 'walnut'
+    implementation = "Walnut"
+    language = "walnut"
     language_info = {
-        'mimetype': 'text/x-walnut',
-        'name': 'walnutkernel',
-        'language': 'walnut',
-        'file_extension': '.walnut',
+        "mimetype": "text/x-walnut",
+        "name": "walnutkernel",
+        "language": "walnut",
+        "file_extension": ".walnut",
     }
 
     _banner = "Da walnut à-la-main kernel"
@@ -39,9 +40,10 @@ class WalnutKernel(ProcessMetaKernel):
         self.register_magics(MyMagic)
 
     def makeWrapper(self):
-        child = spawn( 'java -jar walnut.jar', echo=True, encoding='utf-8')
-        child.expect(r'\n')
-        return REPLWrapper(child, r'\[Walnut\]\$ ', None, echo=True)
+        child = spawn("java -jar walnut.jar", echo=True, encoding="utf-8")
+        child.expect(r"\n")
+        return REPLWrapper(child, r"\[Walnut\]\$ ", None, echo=True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     WalnutKernel.run_as_main()
