@@ -43,7 +43,7 @@ class WalnutKernel(ProcessMetaKernel):
         self.register_magics(MyMagic)
 
     def makeWrapper(self):
-        child = spawn("java -jar /data/walnut.jar", cwd=HOME, echo=True, encoding="utf-8")
+        child = spawn("java -Xmx16g -jar /data/walnut.jar", cwd=HOME, echo=True, encoding="utf-8")
         child.expect(r"\n")
         return REPLWrapper(child, r"\[Walnut\]\$ ", None, echo=True)
 
