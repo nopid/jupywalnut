@@ -11,7 +11,7 @@ walnut:
 	docker build -t nopid/walnut .
 
 walnut-multi: create-builder
-	$(BUILDX) -t nopid/walnut -t nopid/3ia:latest --push .
+	$(BUILDX) -t nopid/walnut -t nopid/walnut:latest --push .
 
 create-builder:
 	docker buildx create --name kat-builder --use
