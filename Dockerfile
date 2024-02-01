@@ -2,7 +2,7 @@ FROM ubuntu
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-venv graphviz openjdk-17-jre python3-json-pointer
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-jsonschema
-RUN pip3 install pydot notebook metakernel rise==5.7.1
+RUN pip3 install pydot notebook==6.5.6 metakernel==0.29.5 rise==5.7.1
 RUN apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 ARG NB_USER=jovyan
