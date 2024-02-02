@@ -1,4 +1,15 @@
+# jupywalnut
 A raw Jupyter kernel and docker container for Walnut
+
+## How do I run this?
+
+Please read `notebooks/howto.ipynb`!
+
+You can either do it directly or, better, using 
+https://mybinder.org/v2/gh/nopid/jupywalnut/main
+
+
+## The old way (kept here for reference)
 
 There are plenty of ways to run me:
  1. as a local docker container pulled from the Docker HUB:
