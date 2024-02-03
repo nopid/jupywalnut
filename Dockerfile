@@ -24,8 +24,10 @@ COPY walnut.jar /data
 ADD auxfiles.tar.gz ${HOME}/
 WORKDIR ${HOME}
 RUN jupyter-kernelspec install /data
+COPY notebooks/howto.ipynb notebooks/
 RUN chown -R ${NB_UID} ${HOME}
 RUN chmod -R a+rx /data
 ENV PYTHONPATH /data:
 USER ${NB_USER}
+RUN jupyter trust notebooks/*.ipynb
 CMD [ "jupyter-notebook"]
