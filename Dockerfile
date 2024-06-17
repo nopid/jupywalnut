@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:22.04
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-venv graphviz openjdk-17-jre python3-json-pointer
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-jsonschema
