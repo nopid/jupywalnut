@@ -1,2 +1,4 @@
 #!/bin/sh
-docker run --rm -it -v $PWD/notebooks:/home/jovyan/notebooks -p 8888:8888 nopid/walnut
+MAXMEM=20g
+NBDIR=$PWD/notebooks
+docker run --rm -it -m=$MAXMEM -v $NBDIR:/home/jovyan/notebooks -p 8888:8888 nopid/walnut
