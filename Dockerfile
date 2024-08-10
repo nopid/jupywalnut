@@ -2,7 +2,8 @@ FROM ubuntu:22.04
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-venv graphviz openjdk-17-jre python3-json-pointer
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-jsonschema
-RUN pip3 install numpy==1.26.4 pydot notebook==6.5.6 metakernel==0.29.5 rise==5.7.1 licofage
+RUN pip3 install -U pip
+RUN pip3 install numpy==1.26.4 pydot notebook==6.5.6 metakernel==0.29.5 rise==5.7.1 licofage==0.8
 RUN apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 ARG NB_USER=jovyan
