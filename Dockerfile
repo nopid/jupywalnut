@@ -1,21 +1,19 @@
 FROM ubuntu:24.04
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y python3-pip python3-venv graphviz openjdk-17-jre python3-json-pointer
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3-jsonschema libflint-dev
-RUN rm /usr/lib/python*/EXTERNALLY-MANAGED
-RUN pip3 install -U --ignore-installed pip
-RUN pip3 install licofage==0.8 ratser==0.1
-RUN pip3 install pyzmq
-RUN pip3 install --ignore-installed jsonschema
-RUN pip3 install numpy==1.26.4 pydot notebook==6.5.7 metakernel==0.29.5 rise==5.7.1
+    DEBIAN_FRONTEND=noninteractive apt-get install -y pipx graphviz openjdk-17-jre libflint-dev build-essential autoconf libtool pkg-config python3-dev
+ENV PIPX_HOME=/opt/pipx
+ENV PIPX_BIN_DIR=/usr/local/bin
+RUN pipx install notebook==6.5.7 --include-deps
+RUN pipx runpip notebook install setuptools pydot metakernel==0.29.5 rise==5.7.1
+RUN pipx runpip notebook install licofage==0.8 ratser==0.2 
+RUN apt-get purge -y --auto-remove build-essential autoconf libtool pkg-config
 RUN apt clean && \
     rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 ARG NB_USER=jovyan
 ARG NB_UID=1000
-ENV USER ${NB_USER}
-ENV NB_UID ${NB_UID}
-ENV HOME /home/${NB_USER}
-
+ENV USER=${NB_USER}
+ENV NB_UID=${NB_UID}
+ENV HOME=/home/${NB_USER}
 RUN userdel -r ubuntu
 RUN adduser --disabled-password \
     --gecos "Default user" \
