@@ -31,7 +31,7 @@ RUN jupyter-kernelspec install /data
 COPY notebooks/howto.ipynb notebooks/
 RUN chown -R ${NB_UID} ${HOME}
 RUN chmod -R a+rx /data
-ENV PYTHONPATH /data:
+ENV PYTHONPATH=/data:
 USER ${NB_USER}
 RUN jupyter trust notebooks/*.ipynb
 CMD [ "jupyter-notebook"]
