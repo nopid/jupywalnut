@@ -1,0 +1,15 @@
+#!/bin/sh
+MAXMEM=128g
+NBDIR=$PWD/notebooks
+ORIGDIR=$(pwd)
+TMPDIR=$(mktemp -d)
+QMD="$1"
+FILE=$(basename "$QMD")
+ZIPDST=$(basename "$QMD" .qmd).zip
+cp "$@" "$TMPDIR/"
+echo "Going to $TMPDIR"
+cd "$TMPDIR"
+mkdir out
+docker run --rm -it -m=$MAXMEM -v $PWD:/home/jovyan/notebooks -p 8888:8888 nopid/walnut quarto render notebooks/"$FILE" --output-dir out --execute --cache
+cd out
+zip "$ORIGDIR/$ZIPDST" *
