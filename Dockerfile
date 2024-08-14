@@ -16,7 +16,7 @@ ENV PIPX_HOME=/opt/pipx
 ENV PIPX_BIN_DIR=/usr/local/bin
 RUN pipx install notebook==6.5.7 --include-deps
 RUN pipx runpip notebook install setuptools pydot metakernel==0.29.5 rise==5.7.1 jupyter-cache
-RUN pipx runpip notebook install licofage==0.8 ratser==0.2 walnut_kernel==0.3.1
+RUN pipx runpip notebook install licofage==0.8 ratser==0.2 walnut_kernel==0.3.2
 RUN cd /tmp && \
 wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-$(dpkg --print-architecture).deb && \
 DEBIAN_FRONTEND=noninteractive apt install -y ./quarto*.deb && \
