@@ -45,6 +45,7 @@ COPY --from=0 /Walnut/auxfiles.tar.gz /tmp
 RUN cd ${HOME} && tar xvzf /tmp/auxfiles.tar.gz && rm /tmp/auxfiles.tar.gz
 WORKDIR ${HOME}
 COPY notebooks/howto.ipynb notebooks/
+COPY notebooks/howto.css notebooks/
 RUN chown -R ${NB_UID} ${HOME}
 RUN chmod -R a+rx /walnut
 ENV PYTHONPATH=/walnut:
