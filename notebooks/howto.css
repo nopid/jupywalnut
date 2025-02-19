@@ -1,0 +1,24 @@
+:root {
+  --jp-content-font-size1: 2.5vw;
+  --jp-code-font-size: 18px;
+}
+
+.jp-ThemedContainer .jp-RenderedHTMLCommon code, .reveal pre, .reveal code {
+  font-size: 18px;
+}
+
+.reveal h1 {
+font-weight: bold;
+color: #e07;
+text-transform: none;
+}
+
+.cool {
+color: #e07;
+}
+
+.reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+font-weight: bold;
+text-transform: none;
+}
+

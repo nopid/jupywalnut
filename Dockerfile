@@ -11,14 +11,14 @@ RUN find . -maxdepth 1 \
 
 FROM ubuntu:24.04
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y pipx graphviz openjdk-17-jre libflint-dev build-essential autoconf libtool pkg-config python3-dev wget less
-ENV PIPX_HOME=/opt/pipx
-ENV PIPX_BIN_DIR=/usr/local/bin
-RUN pipx install notebook==6.5.7 --include-deps
-RUN pipx runpip notebook install setuptools pydot metakernel==0.29.5 rise==5.7.1 jupyter-cache
-RUN pipx runpip notebook install licofage==0.9.1 ratser==0.2 walnut_kernel==0.3.2
+    DEBIAN_FRONTEND=noninteractive apt-get install -y graphviz openjdk-17-jre libflint-dev build-essential autoconf libtool pkg-config python3-dev wget less
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_TOOL_DIR=/opt/uv
+ENV UV_TOOL_BIN_DIR=/usr/local/bin
+RUN uv tool install --python 3.12 --with walnut_kernel,pydot,jupyter-cache,jupyterlab-rise jupyter-core
 RUN cd /tmp && \
-wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.5.56/quarto-1.5.56-linux-$(dpkg --print-architecture).deb && \
+wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.40/quarto-1.6.40-linux-$(dpkg --print-architecture).deb && \
 DEBIAN_FRONTEND=noninteractive apt install -y ./quarto*.deb && \
 rm quarto*.deb
 COPY walnut.xml /opt/quarto/share/pandoc/syntax-definitions/
@@ -38,6 +38,7 @@ RUN adduser --disabled-password \
 RUN mkdir -p ${HOME}/Result
 RUN mkdir /walnut
 COPY jupyter_notebook_config.py /etc/jupyter/
+COPY jupyter_server_config.py /etc/jupyter/
 COPY --from=0 /Walnut/walnut.jar /walnut
 COPY --from=0 /Walnut/auxfiles.tar.gz /tmp
 RUN cd ${HOME} && tar xvzf /tmp/auxfiles.tar.gz && rm /tmp/auxfiles.tar.gz
@@ -46,9 +47,9 @@ COPY notebooks/howto.ipynb notebooks/
 RUN chown -R ${NB_UID} ${HOME}
 RUN chmod -R a+rx /walnut
 ENV PYTHONPATH=/walnut:
-ENV QUARTO_PYTHON=/opt/pipx/venvs/notebook/bin/python3
+ENV QUARTO_PYTHON=/opt/uv/jupyter-core/bin/python3
 ENV WALNUT_JAR=/walnut/walnut.jar
 ENV WALNUT_HOME=${HOME}
 USER ${NB_USER}
 RUN jupyter trust notebooks/*.ipynb
-CMD [ "jupyter-notebook"]
+CMD [ "jupyter", "lab" ]
