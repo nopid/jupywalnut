@@ -16,7 +16,8 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_TOOL_DIR=/opt/uv
 ENV UV_TOOL_BIN_DIR=/usr/local/bin
-RUN uv tool install --python 3.12 --with walnut_kernel,pydot,jupyter-cache,jupyterlab-rise jupyter-core
+RUN uv tool install --python 3.12 --with walnut_kernel,pydot,notebook,jupyter-cache,jupyterlab-rise jupyter-core
+RUN ln -s /opt/uv/jupyter-core/bin/jupyter-notebook /usr/local/bin/jupyter-notebook
 RUN cd /tmp && \
 wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.40/quarto-1.6.40-linux-$(dpkg --print-architecture).deb && \
 DEBIAN_FRONTEND=noninteractive apt install -y ./quarto*.deb && \
